@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Send Me 1 USDC</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2em;
+      background: #f5f5fa;
+      color: #222;
+      text-align: center;
+    }
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 2em;
+      max-width: 400px;
+      margin: 2em auto;
+    }
+    button {
+      background: #2775CA;
+      color: #fff;
+      font-size: 1.2em;
+      padding: 0.7em 2em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 1em;
+    }
+    button:hover {
+      background: #1857a8;
+    }
+    #result {
+      margin-top: 1.2em;
+      color: #2775CA;
+      font-weight: bold;
+    }
+    code {
+      background: #eee;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Send Me 1 USDC</h1>
+    <p>
+      Support me by sending <b>1 USDC</b> directly to my wallet.<br>
+      My address: <code>0xc5a044eF36014c66887BAD57e4B56545ed29B5dD</code>
+    </p>
+    <button id="usdcButton">Send Me 1 USDC</button>
+    <div id="result"></div>
+    <p style="font-size:0.9em;color:#777;margin-top:2em;">
+      Requires an Ethereum wallet (e.g., MetaMask) and some USDC.<br>
+      <a href="https://etherscan.io/address/0xc5a044eF36014c66887BAD57e4B56545ed29B5dD" target="_blank">View wallet on Etherscan</a>
+    </p>
+  </div>
+  <script>
+    const USDC_ADDRESS = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"; // Ethereum Mainnet USDC
+    const RECIPIENT = "0xc5a044eF36014c66887BAD57e4B56545ed29B5dD";
+    const USDC_ABI = [
+      "function transfer(address to, uint amount) returns (bool)"
+    ];
+    document.getElementById('usdcButton').onclick = async function() {
+      const result = document.getElementById('result');
+      result.textContent = '';
+      if (!window.ethereum) {
+        result.textContent = "No Ethereum wallet detected. Please install MetaMask!";
+        return;
+      }
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const usdc = new ethers.Contract(USDC_ADDRESS, USDC_ABI, signer);
+        const amount = ethers.utils.parseUnits("1", 6); // USDC has 6 decimals
+        const tx = await usdc.transfer(RECIPIENT, amount);
+        result.textContent = "Transaction sent! Hash: " + tx.hash;
+      } catch (err) {
+        result.textContent = "Error: " + (err && err.message ? err.message : err);
+      }
+    }
+  </script>
+</body>
+</html>
