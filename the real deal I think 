@@ -575,3 +575,200 @@ Thank you for your payment!
             <div className=\"confirm-item\">
               <span className=\"confirm-label\">From</span>
               <span className=\"confirm-va
+
+
+Perfect! Now let me create a simpler, more focused README for quick reference:
+Action: file_editor create /app/QUICK_SETUP_GUIDE.md --file-text "# 🚀 Quick Setup Guide - USDC Payment Website
+
+## ⚡ 3-Minute Setup
+
+### Step 1: Install Dependencies
+```bash
+npm install ethers axios lucide-react sonner @radix-ui/react-alert-dialog @radix-ui/react-separator react-router-dom
+```
+
+### Step 2: Copy Files
+Copy these files to your React project:
+- `src/App.js` (main application)
+- `src/App.css` (styles)
+- `src/index.js` (entry point)
+
+### Step 3: Configure (IMPORTANT!)
+
+Open `src/App.js` and find the **CUSTOMIZATION SECTION** (around line 30):
+
+```javascript
+// 🔧 CHANGE THESE VALUES:
+
+// Your wallet address - WHERE YOU RECEIVE PAYMENTS
+const RECIPIENT_ADDRESS = \"0xYOUR_WALLET_ADDRESS_HERE\";
+
+// How much USDC to charge
+const PAYMENT_AMOUNT = \"1\";  // Change to \"5\" for $5, \"10\" for $10, etc.
+
+// Which blockchain network to use
+const NETWORK_CONFIG = {
+  chainId: \"0x89\",              // Polygon (cheap fees)
+  chainName: \"Polygon Mainnet\",
+  // ... rest stays the same for Polygon
+};
+```
+
+### Step 4: Run
+```bash
+npm start
+```
+
+Visit `http://localhost:3000` and you're done! 🎉
+
+---
+
+## 🎨 Easy Customizations
+
+### Change Payment Amount
+```javascript
+const PAYMENT_AMOUNT = \"10\";  // Now charges $10 USDC
+```
+
+### Change to Ethereum Network
+```javascript
+const NETWORK_CONFIG = {
+  chainId: \"0x1\",
+  chainName: \"Ethereum Mainnet\",
+  nativeCurrency: { name: \"ETH\", symbol: \"ETH\", decimals: 18 },
+  rpcUrls: [\"https://mainnet.infura.io/v3/YOUR_KEY\"],
+  blockExplorerUrls: [\"https://etherscan.io/\"],
+  blockExplorerName: \"Etherscan\"
+};
+
+// Also update USDC contract:
+const USDC_CONTRACT_ADDRESS = \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\";
+```
+
+### Change Colors (App.css)
+```css
+:root {
+  --primary-color: #ff6b6b;  /* Red theme */
+  --secondary-color: #ee5a6f;
+  --success-color: #51cf66;
+}
+```
+
+### Change Title & Subtitle (App.js)
+Find around line 460:
+```javascript
+<h1 className=\"title\">Your Custom Title</h1>
+<p className=\"subtitle\">Your custom description</p>
+```
+
+---
+
+## 🌐 Supported Networks
+
+| Network | Chain ID | Gas Fees | USDC Contract |
+|---------|----------|----------|---------------|
+| **Polygon** (Recommended) | `0x89` | ~$0.01 | `0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359` |
+| Ethereum | `0x1` | ~$5-20 | `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` |
+| BSC | `0x38` | ~$0.10 | `0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d` |
+| Base | `0x2105` | ~$0.01 | `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` |
+
+💡 **Tip**: Polygon is recommended for low fees!
+
+---
+
+## ✅ Checklist Before Going Live
+
+- [ ] Updated `RECIPIENT_ADDRESS` to your wallet
+- [ ] Set correct `PAYMENT_AMOUNT`
+- [ ] Verified network is correct (Polygon = `0x89`)
+- [ ] Tested with MetaMask on testnet first
+- [ ] Customized title and colors (optional)
+- [ ] Verified USDC contract address for your network
+
+---
+
+## 🧪 Test on Testnet First!
+
+### Polygon Mumbai Testnet
+```javascript
+const NETWORK_CONFIG = {
+  chainId: \"0x13881\",
+  chainName: \"Polygon Mumbai\",
+  nativeCurrency: { name: \"MATIC\", symbol: \"MATIC\", decimals: 18 },
+  rpcUrls: [\"https://rpc-mumbai.maticvigil.com/\"],
+  blockExplorerUrls: [\"https://mumbai.polygonscan.com/\"]
+};
+
+// Mumbai USDC: 0x0FA8781a83E46826621b3BC094Ea2A0212e71B23
+```
+
+Get testnet MATIC & USDC from faucets:
+- https://faucet.polygon.technology/
+- https://mumbaifaucet.com/
+
+---
+
+## 🐛 Common Issues
+
+### \"Insufficient USDC balance\"
+- User doesn't have enough USDC in their wallet
+- Make sure they're on the correct network
+
+### \"Insufficient [TOKEN] for gas fees\"
+- User needs native token (MATIC, ETH, BNB) for gas
+- On Polygon, they need ~0.01 MATIC
+
+### \"Wrong network\"
+- App will auto-prompt to switch networks
+- User just needs to approve in MetaMask
+
+### MetaMask doesn't open
+- Make sure MetaMask extension is installed
+- Try refreshing the page
+
+---
+
+## 📦 What You Get
+
+✅ Wallet connection with MetaMask  
+✅ Auto network switching  
+✅ Payment confirmation dialog  
+✅ Transaction receipts with copy/download  
+✅ Real-time status updates  
+✅ Beautiful animated UI  
+✅ Mobile responsive  
+✅ Production ready  
+
+---
+
+## 🔒 Security Notes
+
+- ✅ All transactions happen on-chain (secure)
+- ✅ No private keys stored anywhere
+- ✅ User approves each transaction in MetaMask
+- ✅ Smart contract handles the transfer
+- ❌ Never ask users for private keys or seed phrases
+
+---
+
+## 💡 Pro Tips
+
+1. **Start with Polygon** - cheapest fees (~$0.01)
+2. **Test on testnet first** - use Mumbai for Polygon
+3. **Keep it simple** - users like one-click payments
+4. **Add your logo** - replace the wallet icon in `logo-circle`
+5. **Customize colors** - match your brand
+
+---
+
+## 📞 Need Help?
+
+1. Check the full code in `GITHUB_READY_CODE.md`
+2. All code is commented and ready to customize
+3. Each section has clear markers for what to change
+
+---
+
+Made with ❤️ - Ready to accept crypto payments!
+"
+Observation: Create successful: /app/QUICK_SETUP_GUIDE.md
